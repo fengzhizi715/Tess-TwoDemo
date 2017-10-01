@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.cv4j.ocrdemo.TestEnglishWithCV4JActivity"/>
+
         <activity android:name="com.cv4j.ocrdemo.CameraActivity"/>
     </application>
 

@@ -65,7 +65,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private int leftRight;
     private int topBottom;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,7 +175,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         }
-
     };
 
     @Override
