@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="cameView_MaskView">
+        <attr name="maskview_line_color" format="color"/>
+        <attr name="maskview_line_stroke" format="dimension"/>
+        <attr name="maskview_line_alpha" format="integer"/>
+        <attr name="maskview_area_bg_color" format="color"/>
+        <attr name="maskview_area_bg_alpha" format="integer"/>
+    </declare-styleable>
+</resources>
