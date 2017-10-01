@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
             CV4JImage cv4JImage = new CV4JImage(bitmap);
             Threshold threshold = new Threshold();
             threshold.adaptiveThresh((ByteProcessor)(cv4JImage.convert2Gray().getProcessor()), Threshold.ADAPTIVE_C_MEANS_THRESH, 12, 30, Threshold.METHOD_THRESH_BINARY);
-            //threshold.process((ByteProcessor)(cv4JImage.convert2Gray().getProcessor()),Threshold.THRESH_OTSU,Threshold.METHOD_THRESH_BINARY,255);
             Bitmap newBitmap = cv4JImage.getProcessor().getImage().toBitmap(Bitmap.Config.ARGB_8888);
 
             ivImage2.setImageBitmap(newBitmap);
@@ -209,14 +208,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         tessBaseApi.init(DATA_PATH, lang);
-
-//       //EXTRA SETTINGS
-//        //For example if we only want to detect numbers
-//        tessBaseApi.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "1234567890");
-//
-//        //blackList Example
-//        tessBaseApi.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +
-//                "YTRWQasdASDfghFGHjklJKLl;L:'\"\\|~`xcvXCVbnmBNM,./<>?");
 
         Log.d(TAG, "Training file loaded");
         tessBaseApi.setImage(bitmap);
