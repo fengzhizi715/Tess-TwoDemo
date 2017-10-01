@@ -214,7 +214,6 @@ public class TestEnglishWithCV4JActivity extends BaseActivity {
 
         tessBaseApi.init(DATA_PATH, lang);
 
-        Log.d(TAG, "Training file loaded");
         tessBaseApi.setImage(bitmap);
         String extractedText = "empty result";
         try {
