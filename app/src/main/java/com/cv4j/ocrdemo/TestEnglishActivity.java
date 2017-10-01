@@ -13,9 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cv4j.core.binary.Threshold;
-import com.cv4j.core.datamodel.ByteProcessor;
-import com.cv4j.core.datamodel.CV4JImage;
 import com.cv4j.ocrdemo.app.BaseActivity;
 import com.cv4j.ocrdemo.camera.EasyCamera;
 import com.cv4j.ocrdemo.camera.util.DisplayUtils;
@@ -36,12 +33,11 @@ import io.reactivex.schedulers.Schedulers;
  * Created by tony on 2017/10/2.
  */
 
-public class TestEnglishWithCV4JActivity extends BaseActivity {
+public class TestEnglishActivity extends BaseActivity {
 
-    private static final String TAG = TestEnglishWithCV4JActivity.class.getSimpleName();
+    private static final String TAG = TestEnglishActivity.class.getSimpleName();
     private Button btnCapture;
     private ImageView ivImage;
-    private ImageView ivImage2;
     private TextView resultView;
     private int screenWidth;
     private float ratio = 0.5f; //取景框高宽比
@@ -54,10 +50,9 @@ public class TestEnglishWithCV4JActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_english_with_cv4j);
+        setContentView(R.layout.activity_test_english);
 
         ivImage = (ImageView) findViewById(R.id.iv_image);
-        ivImage2 = (ImageView) findViewById(R.id.iv_image2);
         btnCapture = (Button) findViewById(R.id.btn_capture);
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +62,13 @@ public class TestEnglishWithCV4JActivity extends BaseActivity {
                 EasyCamera.create(destination)
                         .withViewRatio(ratio)
                         .withMarginCameraEdge(50,50)
-                        .start(TestEnglishWithCV4JActivity.this);
+                        .start(TestEnglishActivity.this);
             }
         });
 
         screenWidth = (int) DisplayUtils.getScreenWidth(this);
         ivImage.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, (int) (screenWidth * ratio)));
         ivImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-        ivImage2.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, (int) (screenWidth * ratio)));
-        ivImage2.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         resultView = (TextView) findViewById(R.id.result);
 
@@ -187,14 +179,7 @@ public class TestEnglishWithCV4JActivity extends BaseActivity {
             options.inSampleSize = 4; // 1 - means max size. 4 - means maxsize/4 size. Don't use value <4, because you need more memory in the heap to store your data.
             Bitmap bitmap = BitmapFactory.decodeFile(imgUri.getPath(), options);
 
-            CV4JImage cv4JImage = new CV4JImage(bitmap);
-            Threshold threshold = new Threshold();
-            threshold.adaptiveThresh((ByteProcessor)(cv4JImage.convert2Gray().getProcessor()), Threshold.ADAPTIVE_C_MEANS_THRESH, 12, 30, Threshold.METHOD_THRESH_BINARY);
-            Bitmap newBitmap = cv4JImage.getProcessor().getImage().toBitmap(Bitmap.Config.ARGB_8888);
-
-            ivImage2.setImageBitmap(newBitmap);
-
-            String result = extractText(newBitmap);
+            String result = extractText(bitmap);
             resultView.setText(result);
 
         } catch (Exception e) {
