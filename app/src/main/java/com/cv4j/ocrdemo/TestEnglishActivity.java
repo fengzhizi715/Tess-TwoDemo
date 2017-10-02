@@ -153,16 +153,7 @@ public class TestEnglishActivity extends BaseActivity {
                 Log.i(TAG,"imageWidth:"+width);
                 Log.i(TAG,"imageHeight:"+height);
 
-                Observable.just(resultUri)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<Uri>() {
-                            @Override
-                            public void accept(Uri uri) throws Exception {
-                                startOCR(uri);
-                            }
-                        });
-
+                startOCR(resultUri);
             }
         }
     }
